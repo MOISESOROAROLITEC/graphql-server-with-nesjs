@@ -30,4 +30,27 @@ export class CoffeesService {
     const coffee = this.coffeeRepository.create(createCoffeeInput);
     return this.coffeeRepository.save(coffee);
   }
+
+  async update(
+    id: number,
+    updateCoffeeInput: GraphQLTypes.UpdateCoffeeInput,
+  ): Promise<Coffee> {
+    const coffee = await this.coffeeRepository.preload({
+      id,
+      ...updateCoffeeInput,
+    });
+    if (!coffee) {
+      throw new UserInputError(`Coffee #${id} does not exist`);
+    }
+    return this.coffeeRepository.save(coffee);
+  }
+
+  async remove(id: number): Promise<Coffee> {
+    try {
+      const coffee = await this.findOne(id);
+      return this.coffeeRepository.remove(coffee);
+    } catch (error) {
+      return error;
+    }
+  }
 }

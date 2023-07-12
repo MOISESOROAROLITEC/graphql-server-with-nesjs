@@ -7,7 +7,7 @@ definitionsFactory.generate({
   typePaths: ['./src/**/*.graphql'],
   path: join(process.cwd(), 'src/graphql-types.ts'),
   outputAs: 'class',
-  watch: true,
+  watch: false,
   skipResolverArgs: true,
   defaultTypeMapping: {
     ID: 'number',
