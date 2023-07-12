@@ -6,6 +6,10 @@
 # graphql generate type files
 graphql-types.ts
 
+# environment
+
+.env
+
 # Logs
 logs
 *.log
