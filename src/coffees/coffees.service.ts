@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Coffee } from './entities/coffee-entity';
 import { Repository } from 'typeorm';
 import { UserInputError } from '@nestjs/apollo';
+import { CreateCoffeeInput } from './dto/create-coffee.input';
 
 @Injectable()
 export class CoffeesService {
@@ -24,9 +25,7 @@ export class CoffeesService {
     return coffee;
   }
 
-  async create(
-    createCoffeeInput: GraphQLTypes.CreateCoffeeInput,
-  ): Promise<Coffee> {
+  async create(createCoffeeInput: CreateCoffeeInput): Promise<Coffee> {
     const coffee = this.coffeeRepository.create(createCoffeeInput);
     return this.coffeeRepository.save(coffee);
   }
