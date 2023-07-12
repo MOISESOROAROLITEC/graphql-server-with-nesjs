@@ -1,4 +1,10 @@
+"""
+Coffee Model
+"""
 type Coffee {
+  """
+  A unique coffee identifier
+  """
   id: ID!
   name: String!
   brand: String!
@@ -7,4 +13,21 @@ type Coffee {
 
 type Query {
   coffees: [Coffee!]!
+  coffee(id: ID!): Coffee
+}
+
+"""
+Create coffee input object type
+"""
+input CreateCoffeeInput {
+  """
+  New coffee name
+  """
+  name: String!
+  brand: String!
+  flavors: [String!]!
+}
+
+type Mutation {
+  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!
 }
