@@ -1,16 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import * as GraphQLTypes from '../graphql-types';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Coffee } from './entities/coffee-entity';
-import { Repository } from 'typeorm';
+import { Coffee } from './entities/coffee.entity';
+import { DeepPartial, Repository } from 'typeorm';
 import { UserInputError } from '@nestjs/apollo';
 import { CreateCoffeeInput } from './dto/create-coffee.input';
+import { Flavor } from './entities/flavor.entity';
+import { UpdateCoffeeInput } from './dto/update-coffee.input';
 
 @Injectable()
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
     private readonly coffeeRepository: Repository<Coffee>,
+    @InjectRepository(Flavor)
+    private readonly flavorRepository: Repository<Flavor>,
   ) {}
 
   async findAll(): Promise<Coffee[]> {
@@ -26,18 +30,30 @@ export class CoffeesService {
   }
 
   async create(createCoffeeInput: CreateCoffeeInput): Promise<Coffee> {
-    const coffee = this.coffeeRepository.create(createCoffeeInput);
+    const flavors = await Promise.all(
+      createCoffeeInput.flavors.map((name) => this.preloadFlavorByName(name)),
+    );
+    const coffee = this.coffeeRepository.create({
+      ...createCoffeeInput,
+      flavors,
+    });
     return this.coffeeRepository.save(coffee);
   }
 
   async update(
     id: number,
-    updateCoffeeInput: GraphQLTypes.UpdateCoffeeInput,
+    updateCoffeeInput: UpdateCoffeeInput,
   ): Promise<Coffee> {
+    const flavors =
+      updateCoffeeInput.flavors &&
+      (await Promise.all(
+        updateCoffeeInput.flavors.map((name) => this.preloadFlavorByName(name)),
+      ));
     const coffee = await this.coffeeRepository.preload({
       id,
       ...updateCoffeeInput,
-    });
+      flavors,
+    } as DeepPartial<Coffee>);
     if (!coffee) {
       throw new UserInputError(`Coffee #${id} does not exist`);
     }
@@ -51,5 +67,15 @@ export class CoffeesService {
     } catch (error) {
       return error;
     }
+  }
+
+  private async preloadFlavorByName(name: string): Promise<Flavor> {
+    const existingFlavor = await this.flavorRepository.findOne({
+      where: { name },
+    });
+    if (existingFlavor) {
+      return existingFlavor;
+    }
+    return this.flavorRepository.create({ name });
   }
 }

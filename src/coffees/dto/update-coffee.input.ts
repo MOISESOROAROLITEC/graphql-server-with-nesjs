@@ -3,7 +3,6 @@ import {
   IsOptional,
   MaxLength,
   MinLength,
-  maxLength,
 } from 'class-validator';
 import * as GraphQLTypes from '../../graphql-types';
 
@@ -16,8 +15,4 @@ export class UpdateCoffeeInput extends GraphQLTypes.UpdateCoffeeInput {
   @MaxLength(30)
   @IsOptional()
   brand: string;
-
-  @ArrayMaxSize(10)
-  @IsOptional()
-  flavors: string[];
 }
