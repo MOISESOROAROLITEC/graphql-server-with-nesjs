@@ -1,3 +1,5 @@
+scalar Date
+
 """
 Coffee Model
 """
@@ -8,6 +10,7 @@ type Coffee {
   id: ID!
   name: String!
   brand: String!
+  createAt: Date
   flavors: [Flavor!]!
 }
 
