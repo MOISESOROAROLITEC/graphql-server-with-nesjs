@@ -7,6 +7,7 @@ import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import { DateScalar } from './coffees/scalar/date.scalar/date.scalar';
+import { DrinkResolver } from './drink/drink.resolver';
 
 dotenv.config();
 
@@ -29,6 +30,6 @@ dotenv.config();
     CoffeesModule,
   ],
   controllers: [AppController],
-  providers: [AppService, DateScalar],
+  providers: [AppService, DateScalar, DrinkResolver],
 })
 export class AppModule {}

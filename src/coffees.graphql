@@ -1,12 +1,14 @@
 scalar Date
 
-"""
-Coffee Model
-"""
-type Coffee {
-  """
-  A unique coffee identifier
-  """
+interface Drink {
+  name: String!
+}
+
+type Tea implements Drink {
+  name: String!
+}
+
+type Coffee implements Drink {
   id: ID!
   name: String!
   brand: String!
@@ -24,13 +26,7 @@ input FlavorInput {
   name: String!
 }
 
-"""
-Create coffee input object type
-"""
 input CreateCoffeeInput {
-  """
-  New coffee name
-  """
   name: String!
   brand: String!
   flavors: [String!]!
@@ -44,7 +40,8 @@ input UpdateCoffeeInput {
 
 type Query {
   coffees: [Coffee!]!
-  coffee(id: ID!): Coffee
+  coffee(id: ID!): Coffee!
+  drinks: [Drink!]!
 }
 
 type Mutation {
