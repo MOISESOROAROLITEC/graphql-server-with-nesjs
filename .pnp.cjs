@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:41a728e46dc4ad96b8983cbc478ba03e7243d4244d2a4de3898c2041d9536dbb25b67412ee4a70c28d0c46c1c2a2056f741f3ce05e5ad5228a36ac1c24a41246#npm:5.62.0"],\
             ["class-transformer", "npm:0.5.1"],\
             ["class-validator", "npm:0.14.0"],\
+            ["dataloader", "npm:2.2.2"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.44.0"],\
             ["eslint-config-prettier", "virtual:41a728e46dc4ad96b8983cbc478ba03e7243d4244d2a4de3898c2041d9536dbb25b67412ee4a70c28d0c46c1c2a2056f741f3ce05e5ad5228a36ac1c24a41246#npm:8.8.0"],\
@@ -4783,6 +4784,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["dataloader", [\
+        ["npm:2.2.2", {\
+          "packageLocation": "./.yarn/cache/dataloader-npm-2.2.2-828252e61d-4dabd24708.zip/node_modules/dataloader/",\
+          "packageDependencies": [\
+            ["dataloader", "npm:2.2.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["date-fns", [\
         ["npm:2.30.0", {\
           "packageLocation": "./.yarn/cache/date-fns-npm-2.30.0-895c790e0f-f7be015232.zip/node_modules/date-fns/",\
@@ -6077,6 +6087,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:41a728e46dc4ad96b8983cbc478ba03e7243d4244d2a4de3898c2041d9536dbb25b67412ee4a70c28d0c46c1c2a2056f741f3ce05e5ad5228a36ac1c24a41246#npm:5.62.0"],\
             ["class-transformer", "npm:0.5.1"],\
             ["class-validator", "npm:0.14.0"],\
+            ["dataloader", "npm:2.2.2"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.44.0"],\
             ["eslint-config-prettier", "virtual:41a728e46dc4ad96b8983cbc478ba03e7243d4244d2a4de3898c2041d9536dbb25b67412ee4a70c28d0c46c1c2a2056f741f3ce05e5ad5228a36ac1c24a41246#npm:8.8.0"],\

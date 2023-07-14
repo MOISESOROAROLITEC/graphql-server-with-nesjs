@@ -46,13 +46,11 @@ export class CoffeesResolver {
   async remove(
     @Args('id', ParseIntPipe) id: number,
   ): Promise<GraphQLTypes.Coffee> {
-    console.log('je supprime');
     return this.coffeeService.remove(id);
   }
 
   @Subscription('coffeeAdded')
   coffeeAdded() {
-    console.log('je souscri');
     return this.pubSub.asyncIterator('coffeeAdded');
   }
 }
